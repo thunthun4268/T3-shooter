@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operación Extracción</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #000; font-family: 'Segoe UI', sans-serif; }
+    canvas { display: block; }
+    #mira {
+      position: fixed; top: 50%; left: 50%; width: 6px; height: 6px;
+      margin: -3px 0 0 -3px; border-radius: 50%; background: #fff; opacity: .8; pointer-events: none;
+    }
+    #mira.impacto { background: #ff3b3b; transform: scale(2.5); opacity: 1; }
+    #instrucciones {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; color: #fff;
+      background: rgba(0,0,0,.6); cursor: pointer; text-align: center;
+    }
+    #instrucciones h1 { margin: 0 0 8px; }
+    #instrucciones p { margin: 4px 0; opacity: .85; }
+    #hud { position: fixed; right: 24px; bottom: 24px; color: #fff; text-align: right; pointer-events: none; text-shadow: 0 0 6px #000; }
+    #hud-arma { font-size: 18px; letter-spacing: 2px; opacity: .85; text-transform: uppercase; }
+    #hud-municion { font-size: 56px; font-weight: 700; line-height: 1; }
+    #hud-municion.vacio { color: #ff4d4d; }
+    #hud-lista { margin-top: 8px; font-size: 14px; opacity: .6; }
+    #hud-lista .activa { opacity: 1; color: #ffd27a; }
+    #objetivo {
+      position: fixed; left: 24px; top: 24px; color: #fff; font-size: 15px; line-height: 1.5;
+      text-shadow: 0 0 6px #000; pointer-events: none;
+    }
+    #aviso {
+      position: fixed; left: 50%; top: 62%; transform: translateX(-50%);
+      color: #ff4d4d; font-size: 22px; font-weight: 700; letter-spacing: 3px;
+      text-shadow: 0 0 6px #000; pointer-events: none; opacity: 0; transition: opacity .15s;
+    }
+    #aviso.visible { opacity: 1; }
+    #final {
+      position: fixed; inset: 0; display: none; flex-direction: column;
+      align-items: center; justify-content: center; color: #fff;
+      background: rgba(0,0,0,.75); text-align: center;
+    }
+    #final h1 { font-size: 56px; margin: 0 0 8px; letter-spacing: 4px; }
+    #final p { font-size: 20px; margin: 0 0 24px; opacity: .9; }
+    #reiniciar {
+      font-size: 18px; padding: 10px 28px; border: 2px solid #fff; background: transparent;
+      color: #fff; cursor: pointer; border-radius: 6px;
+    }
+    #reiniciar:hover { background: #fff; color: #000; }
+  </style>
+</head>
+<body>
+  <div id="mira"></div>
+  <div id="objetivo"></div>
+
+  <div id="hud">
+    <div id="hud-arma"></div>
+    <div id="hud-municion"></div>
+    <div id="hud-lista"></div>
+  </div>
+  <div id="aviso"></div>
+
+  <div id="instrucciones">
+    <h1>OPERACIÓN EXTRACCIÓN</h1>
+    <p>Haz clic para jugar</p>
+    <p>W A S D: moverte &nbsp;|&nbsp; Mouse: mirar &nbsp;|&nbsp; Clic: disparar &nbsp;|&nbsp; 1 / 2: cambiar arma &nbsp;|&nbsp; Esc: pausar</p>
+  </div>
+
+  <div id="final">
+    <h1 id="final-titulo"></h1>
+    <p id="final-texto"></p>
+    <button id="reiniciar">Reiniciar (R)</button>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
